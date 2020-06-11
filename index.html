@@ -11,15 +11,25 @@
     <title>Etch a sketch</title>
   </head>
   <body>
-    <header>
+    <header class="text-center">
       <h1>Etch-a-sketch</h1>
     </header>
     <div class="container">
-      <div id="modes">
-        <div class="btn">Reset Board</div>
-        <div class="btn enabled">Normal Mode : <span>Enabled</span></div>
-        <div class="btn">Rainbow Mode : <span>Disabled</span></div>
-      </div>
+      <ul id="modes">
+        <li>
+          <div class="btn reset text-center">Reset Board</div>
+        </li>
+        <li>
+          <div class="btn normal text-center enabled">
+            Normal Mode : <span>Enabled</span>
+          </div>
+        </li>
+        <li>
+          <div class="btn rainbow text-center">
+            Rainbow Mode : <span>Disabled</span>
+          </div>
+        </li>
+      </ul>
       <div id="sketch"></div>
       <div id="options"></div>
     </div>
