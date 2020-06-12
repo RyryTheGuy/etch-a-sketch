@@ -102,6 +102,8 @@ header h1 {
 
 #sketch .grid .tile {
   background: #fff;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 /* Footer */
