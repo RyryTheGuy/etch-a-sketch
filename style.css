@@ -31,6 +31,33 @@ ul li {
   padding-bottom: 1rem;
 }
 
+input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: "Balsamiq Sans", cursive;
+  font-size: 3rem;
+  text-align: center;
+  cursor: text;
+  width: 100%;
+}
+
+input:disabled {
+  cursor: default;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Utility Styles */
 .text-center {
   text-align: center;
@@ -72,6 +99,26 @@ ul li {
   background-color: #83d63f;
 }
 
+.line {
+  height: 0.5rem;
+  width: 25rem;
+  background: #0f0a0a;
+  display: block;
+  margin: 0 auto 1.5rem auto;
+}
+
+.error-message {
+  margin: 1rem auto 0 auto;
+  font-size: 2rem;
+  width: 100%;
+  max-width: 15rem;
+  color: #c3423f;
+}
+
+.hidden {
+  display: none;
+}
+
 /* Header */
 header {
   height: 20rem;
@@ -84,8 +131,9 @@ header h1 {
 /* Sketch Area */
 #sketch {
   background-color: #f5efed;
-  width: 90rem;
-  height: 70rem;
+  width: 100%;
+  max-width: 90rem;
+  height: 74rem;
   border: 5rem solid #c3423f;
   border-radius: 20px;
 }
@@ -104,6 +152,40 @@ header h1 {
   background: #fff;
   -webkit-user-select: none;
   -moz-user-select: none;
+}
+
+/* Options */
+#options {
+  font-size: 3rem;
+}
+
+#options .options-title {
+  color: #0f0a0a;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+#options .options-gridSize {
+  display: inline-block;
+  padding: 1rem;
+  background-color: #f5efed;
+  border-radius: 1rem;
+  border: 2px solid black;
+  box-shadow: 0 5px #999;
+  width: 8rem;
+}
+
+#options .options-gridSize-disabled {
+  display: inline-block;
+  padding: 1rem;
+  background-color: rgb(219, 214, 211);
+  border-radius: 1rem;
+  border: 2px solid black;
+  box-shadow: 0 5px #999;
+  width: 8rem;
+}
+
+#options .change-size {
+  margin-top: 1rem;
 }
 
 /* Footer */
