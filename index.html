@@ -31,21 +31,36 @@
         </li>
       </ul>
       <div id="sketch"></div>
-      <ul id="modes">
-        <li>
-          <div class="btn reset text-center"><span>Reset Board</span></div>
-        </li>
-        <li>
-          <div class="btn normal text-center enabled">
-            Normal Mode : <span>Enabled</span>
+      <div id="options">
+        <h2 class="options-title text-center">Grid Size</h2>
+        <div class="line"></div>
+        <div class="text-center">
+          <div class="options-gridSize text-center">
+            <input
+              type="number"
+              name="gridSize"
+              id="gridSize"
+              max="64"
+              min="16"
+            />
           </div>
-        </li>
-        <li>
-          <div class="btn rainbow text-center">
-            Rainbow Mode : <span>Disabled</span>
+          x
+          <div class="options-gridSize-disabled">
+            <input
+              type="number"
+              name="gridSizeMirror"
+              id="gridSizeMirror"
+              disabled
+            />
           </div>
-        </li>
-      </ul>
+          <div class="btn change-size text-center">
+            Set Grid Size
+          </div>
+          <div class="error-message hidden">
+            * Please enter a number between 16 and 64 *
+          </div>
+        </div>
+      </div>
     </div>
     <footer>
       <a href="https://www.freepik.com/free-photos-vectors/background"
