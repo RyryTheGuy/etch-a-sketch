@@ -1,21 +1,7 @@
 // IIFE to populate the grid
 (function () {
-  // Create a grid container
-  let gridContainer = document.createElement("div");
-  gridContainer.classList.add("grid");
-  // Create a 16 x 16 grid inside the grid container
-  for (let i = 0; i < 256; i++) {
-    let tile = document.createElement("div");
-    tile.classList.add("tile");
-    // Add an event listener to the tile
-    tile.addEventListener("mouseenter", hoverTileColorNormal);
-    // Append the tile to the grid container
-    gridContainer.appendChild(tile);
-  }
-  // Append the grid container to the html page
-  let sketchArea = document.querySelector("#sketch");
-  sketchArea.appendChild(gridContainer);
-
+  // Create a 16x16 grid
+  createGrid(16);
   // Adding Reset, Normal Mode, and Rainbow Mode button events
   const resetButton = document.querySelector(".reset");
   const normalButton = document.querySelector(".normal");
@@ -27,11 +13,42 @@
   // Adding grid size change events
   const gridSizeInput = document.querySelector("#gridSize");
   const gridSizeMirror = document.querySelector("#gridSizeMirror");
+  const gridSizeButton = document.querySelector(".change-size");
   gridSizeInput.value = "16";
   gridSizeMirror.value = "16";
   gridSizeInput.addEventListener("input", mirrorInputs);
   gridSizeInput.addEventListener("blur", validateSize);
+  gridSizeButton.addEventListener("click", changeGridSize);
 })();
+
+// Creates or Changes the grid size to the specified size
+function createGrid(size) {
+  // Create a grid container
+  let gridContainer = document.createElement("div");
+  gridContainer.classList.add("grid");
+  gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  // Create a 16 x 16 grid inside the grid container
+  for (let i = 0; i < size * size; i++) {
+    let tile = document.createElement("div");
+    tile.classList.add("tile");
+    // Add an event listener to the tile
+    tile.addEventListener("mouseenter", hoverTileColorNormal);
+    // Append the tile to the grid container
+    gridContainer.appendChild(tile);
+  }
+
+  // Remove grid if it already exists
+  if (document.querySelector(".grid") !== null) {
+    // Append the grid container to the html page
+    let sketchArea = document.querySelector("#sketch");
+    sketchArea.removeChild(sketchArea.firstChild);
+    sketchArea.appendChild(gridContainer);
+  } else {
+    // Append the grid container to the html page
+    let sketchArea = document.querySelector("#sketch");
+    sketchArea.appendChild(gridContainer);
+  }
+}
 
 // Change the hovered tile's background to black
 function hoverTileColorNormal(e) {
@@ -96,6 +113,7 @@ function changeMode(e) {
   }
 }
 
+// Mirror the user's inputs from the enabled input to the disabled one
 function mirrorInputs(e) {
   // Mirror the number entered in the input
   const inputMirror = document.querySelector("#gridSizeMirror");
@@ -107,11 +125,46 @@ function mirrorInputs(e) {
   inputMirror.value = e.target.value;
 }
 
+// Validate the user input
 function validateSize(e) {
+  // Disabled input used to mirror the enabled input
   const inputMirror = document.querySelector("#gridSizeMirror");
   // Validate the size of the number
   if (e.target.value > 64 || e.target.value < 16) {
+    // Show the error message
     const errorMsg = document.querySelector(".error-message");
     errorMsg.classList.remove("hidden");
+    // Set both inputs to the max if the number entered is over the limit
+    if (e.target.value > 64) {
+      e.target.value = 64;
+      inputMirror.value = 64;
+    }
+    // Set both inputs to the min if the number entered is less than the limit
+    if (e.target.value < 16) {
+      e.target.value = 16;
+      inputMirror.value = 16;
+    }
+  } else {
+    const errorMsg = document.querySelector(".error-message");
+    errorMsg.classList.add("hidden");
+  }
+}
+
+// Changes the grid size based on user input
+function changeGridSize(e) {
+  // User input to change grid size
+  const inputSize = document.querySelector("#gridSize");
+  // Do nothing if the number isn't within range somehow
+  if (inputSize.value > 64 || inputSize.value < 16) return;
+
+  // Allow the grid to be changed if it is within the range
+  if (inputSize.value <= 64 && inputSize.value >= 16) {
+    // Remove the error message if it is displaying
+    const errorMsg = document.querySelector(".error-message");
+    if (!errorMsg.classList.contains("hidden"))
+      errorMsg.classList.add("hidden");
+
+    // Create a grid the size the user selects
+    createGrid(inputSize.value);
   }
 }
