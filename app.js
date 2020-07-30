@@ -23,6 +23,7 @@
 
 // Creates or Changes the grid size to the specified size
 function createGrid(size) {
+  const normalButton = document.querySelector(".normal");
   // Create a grid container
   let gridContainer = document.createElement("div");
   gridContainer.classList.add("grid");
@@ -32,7 +33,9 @@ function createGrid(size) {
     let tile = document.createElement("div");
     tile.classList.add("tile");
     // Add an event listener to the tile
-    tile.addEventListener("mouseenter", hoverTileColorNormal);
+    if (normalButton.classList.contains("enabled"))
+      tile.addEventListener("mouseenter", hoverTileColorNormal);
+    else tile.addEventListener("mouseenter", hoverTileColorRainbow);
     // Append the tile to the grid container
     gridContainer.appendChild(tile);
   }
